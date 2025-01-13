@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executor GUI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #executorGUI {
+            position: absolute;
+            top: 20%;
+            left: 20%;
+            width: 400px;
+            height: 300px;
+            background-color: #2f2f2f;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            cursor: move;
+        }
+
+        #executorGUI h3 {
+            margin-top: 0;
+        }
+
+        #executeButton {
+            background-color: #5cdb5c;
+            color: white;
+            padding: 10px;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        #executeButton:hover {
+            background-color: #45b845;
+        }
+    </style>
+</head>
+<body>
+    <div id="executorGUI">
+        <h3>Executor</h3>
+        <button id="executeButton">Execute Code</button>
+    </div>
+
+    <script>
+        // Draggable functionality
+        let executorGUI = document.getElementById("executorGUI");
+
+        executorGUI.onmousedown = function(event) {
+            let offsetX = event.clientX - executorGUI.getBoundingClientRect().left;
+            let offsetY = event.clientY - executorGUI.getBoundingClientRect().top;
+
+            function moveAt(pageX, pageY) {
+                executorGUI.style.left = pageX - offsetX + 'px';
+                executorGUI.style.top = pageY - offsetY + 'px';
+            }
+
+            document.onmousemove = function(event) {
+                moveAt(event.pageX, event.pageY);
+            };
+
+            executorGUI.onmouseup = function() {
+                document.onmousemove = null;
+                executorGUI.onmouseup = null;
+            };
+        };
+
+        // Button to execute code (add your own functionality here)
+        document.getElementById("executeButton").onclick = function() {
+            alert('Execute Code Logic Here');
+        };
+    </script>
+</body>
+</html>
